@@ -7,11 +7,13 @@ import Portfolio from "@/components/Portfolio";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 export default function Index() {
   return (
     <>
       <Navigation />
+      <LanguageSwitcher />
       <main>
         <Hero />
         <ValueProps />

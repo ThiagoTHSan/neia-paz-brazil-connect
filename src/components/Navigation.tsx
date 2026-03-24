@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
 import logo from "@/assets/LogoNeia.png";
+import { useLanguage } from "@/i18n/LanguageContext";
 
-const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Contact", href: "#contact" },
+const navKeys = [
+  { key: "nav.about", href: "#about" },
+  { key: "nav.services", href: "#services" },
+  { key: "nav.portfolio", href: "#portfolio" },
+  { key: "nav.contact", href: "#contact" },
 ];
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -30,21 +32,19 @@ export default function Navigation() {
           <img src={logo} alt="Neia Paz – International Project Manager" className="h-10 w-auto lg:h-12" />
         </a>
 
-        {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-10">
-          {navLinks.map((link) => (
+          {navKeys.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
                 className="text-dark-foreground/70 text-sm font-medium tracking-wide uppercase hover:text-primary transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-dark"
               >
-                {link.label}
+                {t(link.key)}
               </a>
             </li>
           ))}
         </ul>
 
-        {/* Mobile hamburger */}
         <button
           onClick={() => setOpen(!open)}
           className="md:hidden relative z-50 w-8 h-8 flex flex-col items-center justify-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
@@ -55,21 +55,20 @@ export default function Navigation() {
           <span className={`block h-px w-6 bg-dark-foreground transition-all duration-300 ${open ? "-rotate-45 -translate-y-[3.5px]" : ""}`} />
         </button>
 
-        {/* Mobile drawer */}
         <div
           className={`fixed inset-0 bg-dark z-40 flex flex-col items-center justify-center transition-all duration-500 md:hidden ${
             open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
           }`}
         >
           <ul className="flex flex-col items-center gap-8">
-            {navLinks.map((link) => (
+            {navKeys.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
                   onClick={() => setOpen(false)}
                   className="text-dark-foreground text-2xl font-serif tracking-wide hover:text-primary transition-colors duration-200"
                 >
-                  {link.label}
+                  {t(link.key)}
                 </a>
               </li>
             ))}

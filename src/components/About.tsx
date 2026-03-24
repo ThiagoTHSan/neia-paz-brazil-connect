@@ -1,8 +1,10 @@
 import portrait from "@/assets/portrait-neia.jpg";
 import { useReveal } from "@/hooks/useReveal";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export default function About() {
   const ref = useReveal();
+  const { t } = useLanguage();
 
   return (
     <section id="about" className="py-24 md:py-32 lg:py-40 bg-background" aria-label="About Neia Paz">
@@ -20,18 +22,14 @@ export default function About() {
 
           <div>
             <h2 className="font-serif text-3xl md:text-4xl lg:text-[2.75rem] leading-[1.15] mb-8">
-              About Neia
+              {t("about.title")}
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-6">
-              With over a decade of experience in the luxury sector, Neia Paz has built a reputation for delivering world-class corporate events and design productions across Brazil. From international design fairs to high-profile corporate gatherings, she bridges the gap between global vision and local execution.
-            </p>
-            <p className="text-muted-foreground leading-relaxed mb-10">
-              Working alongside international designers, architects, and Fortune 500 companies, Neia ensures every detail — from venue selection and vendor coordination to brand experience design — meets the highest international standards while honoring the nuances of operating in Brazil.
-            </p>
+            <p className="text-muted-foreground leading-relaxed mb-6">{t("about.p1")}</p>
+            <p className="text-muted-foreground leading-relaxed mb-10">{t("about.p2")}</p>
 
             <blockquote className="border-l-2 border-primary pl-6">
               <p className="font-serif italic text-primary text-xl md:text-2xl leading-snug">
-                "Every detail tells your brand's story."
+                {t("about.quote")}
               </p>
             </blockquote>
           </div>
