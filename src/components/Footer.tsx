@@ -1,20 +1,25 @@
 import { Linkedin, Instagram, MessageCircle } from "lucide-react";
 import logo from "@/assets/LogoNeia.png";
+import { useLanguage } from "@/i18n/LanguageContext";
+
+const navKeys = ["nav.about", "nav.services", "nav.portfolio", "nav.contact"];
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-dark py-16 md:py-20" role="contentinfo">
       <div className="container mx-auto px-6 lg:px-12 flex flex-col items-center">
         <img src={logo} alt="Neia Paz" className="h-10 mb-8" />
 
         <nav className="flex flex-wrap justify-center gap-8 mb-8" aria-label="Footer navigation">
-          {["About", "Services", "Portfolio", "Contact"].map((l) => (
+          {navKeys.map((key) => (
             <a
-              key={l}
-              href={`#${l.toLowerCase()}`}
+              key={key}
+              href={`#${key.split(".")[1]}`}
               className="text-dark-foreground/50 text-sm hover:text-primary transition-colors"
             >
-              {l}
+              {t(key)}
             </a>
           ))}
         </nav>
@@ -31,9 +36,7 @@ export default function Footer() {
           </a>
         </div>
 
-        <p className="text-dark-foreground/30 text-xs">
-          © 2025 Neia Paz. All rights reserved.
-        </p>
+        <p className="text-dark-foreground/30 text-xs">{t("footer.rights")}</p>
       </div>
     </footer>
   );
