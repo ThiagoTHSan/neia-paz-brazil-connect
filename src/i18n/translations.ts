@@ -1,10 +1,11 @@
 export type Language = "en" | "pt" | "it" | "es";
 
-export const languages: { code: Language; label: string; flag: string }[] = [
-  { code: "en", label: "English", flag: "🇺🇸" },
-  { code: "pt", label: "Português", flag: "🇧🇷" },
-  { code: "it", label: "Italiano", flag: "🇮🇹" },
-  { code: "es", label: "Español", flag: "🇪🇸" },
+/** countryCode ISO 3166-1 alpha-2 (minúsculas) — usado para imagens de bandeira estáveis em qualquer SO */
+export const languages: { code: Language; label: string; countryCode: string }[] = [
+  { code: "en", label: "English", countryCode: "us" },
+  { code: "pt", label: "Português", countryCode: "br" },
+  { code: "it", label: "Italiano", countryCode: "it" },
+  { code: "es", label: "Español", countryCode: "es" },
 ];
 
 const translations: Record<Language, Record<string, string>> = {
