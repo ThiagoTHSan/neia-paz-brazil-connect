@@ -13,7 +13,7 @@ export default function About() {
           <div className="relative">
             <img
               src={portrait}
-              alt="Neia Paz, International Project Manager, professional portrait"
+              alt={t("about.image.alt")}
               className="w-full max-w-md mx-auto lg:mx-0 aspect-[4/5] object-cover shadow-xl shadow-black/10"
               loading="lazy"
             />
@@ -26,6 +26,24 @@ export default function About() {
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-6">{t("about.p1")}</p>
             <p className="text-muted-foreground leading-relaxed mb-10">{t("about.p2")}</p>
+
+            <div className="mb-10">
+              <h3 className="text-sm font-semibold tracking-wide uppercase mb-4">{t("about.skills.title")}</h3>
+              <ul className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+                <li>
+                  <span className="font-medium text-foreground">{t("about.skills.network.title")}</span>{" "}
+                  <span>{t("about.skills.network.desc")}</span>
+                </li>
+                <li>
+                  <span className="font-medium text-foreground">{t("about.skills.pm.title")}</span>{" "}
+                  <span>{t("about.skills.pm.desc")}</span>
+                </li>
+                <li>
+                  <span className="font-medium text-foreground">{t("about.skills.resources.title")}</span>{" "}
+                  <span>{t("about.skills.resources.desc")}</span>
+                </li>
+              </ul>
+            </div>
 
             <blockquote className="border-l-2 border-primary pl-6">
               <p className="font-serif italic text-primary text-xl md:text-2xl leading-snug">
