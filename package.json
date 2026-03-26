@@ -10,7 +10,10 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "preflight": "npm run build",
+    "preflight:strict": "npm run lint && npm run test && npm run build",
+    "release": "npm run preflight && git push origin main"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
