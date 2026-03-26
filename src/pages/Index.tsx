@@ -8,6 +8,7 @@ import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import FloatingWhatsAppButton from "@/components/FloatingWhatsAppButton";
 
 export default function Index() {
   return (
@@ -24,6 +25,7 @@ export default function Index() {
         <Contact />
       </main>
       <Footer />
+      <FloatingWhatsAppButton />
     </>
   );
 }

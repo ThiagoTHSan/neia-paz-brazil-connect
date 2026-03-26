@@ -1,5 +1,6 @@
-import { Linkedin, Instagram, MessageCircle } from "lucide-react";
+import { Linkedin, Instagram } from "lucide-react";
 import logo from "@/assets/LogoNeia.png";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const navKeys = ["nav.about", "nav.services", "nav.portfolio", "nav.contact"];
@@ -32,7 +33,7 @@ export default function Footer() {
             <Instagram className="w-5 h-5" />
           </a>
           <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-dark-foreground/40 hover:text-primary transition-colors">
-            <MessageCircle className="w-5 h-5" />
+            <WhatsAppIcon className="w-5 h-5" />
           </a>
         </div>
 

@@ -1,5 +1,6 @@
 import { useState, FormEvent } from "react";
-import { Linkedin, Instagram, MessageCircle } from "lucide-react";
+import { Linkedin, Instagram } from "lucide-react";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { useReveal } from "@/hooks/useReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -27,7 +28,7 @@ export default function Contact() {
             <div className="space-y-4 mb-10">
               <p className="text-sm">
                 <span className="text-muted-foreground">{t("contact.email")}: </span>
-                <a href="mailto:hello@neiapaz.com" className="hover:text-primary transition-colors">hello@neiapaz.com</a>
+                <a href="mailto:info@neiapaz.com" className="hover:text-primary transition-colors">info@neiapaz.com</a>
               </p>
               <p className="text-sm">
                 <span className="text-muted-foreground">{t("contact.based")}: </span>
@@ -52,7 +53,7 @@ export default function Contact() {
                 className="inline-flex items-center gap-2 border border-foreground/15 px-5 py-2.5 text-sm font-medium transition-all duration-200 hover:border-primary hover:text-primary active:scale-[0.97]"
                 aria-label="WhatsApp"
               >
-                <MessageCircle className="w-4 h-4" /> WhatsApp
+                <WhatsAppIcon className="w-4 h-4 shrink-0" /> WhatsApp
               </a>
               <a
                 href="https://instagram.com/neiapaz"
