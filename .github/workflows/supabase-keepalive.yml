@@ -22,11 +22,24 @@ jobs:
             echo "::error::Configure os secrets do repositório: SUPABASE_URL e SUPABASE_ANON_KEY (mesmos valores de VITE_SUPABASE_* no .env.local)."
             exit 1
           fi
+          # WHY: `curl` exit code 6 geralmente é URL/host inválido. Evita debug às cegas.
+          if ! echo "${SUPABASE_URL}" | grep -Eq '^https?://'; then
+            echo "::error::SUPABASE_URL inválida. Use o formato completo com https:// (ex.: https://xxxxx.supabase.co)."
+            exit 1
+          fi
           base="${SUPABASE_URL%/}"
+          set +e
           code=$(curl -sS -o /tmp/supabase_keepalive.json -w "%{http_code}" \
             -H "apikey: ${SUPABASE_ANON_KEY}" \
             -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
             "${base}/auth/v1/health")
+          curl_exit=$?
+          set -e
+          if [ "$curl_exit" -ne 0 ]; then
+            echo "::error::Falha ao conectar no Supabase (curl exit code: ${curl_exit}). Verifique se SUPABASE_URL está correta e acessível (com https://)."
+            echo "Supabase base URL (sem barra final): ${base}"
+            exit 1
+          fi
           if [ "$code" != "200" ]; then
             echo "::error::Supabase respondeu HTTP $code"
             cat /tmp/supabase_keepalive.json || true
