@@ -18,6 +18,12 @@ jobs:
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
           set -euo pipefail
+          # WHY: Secrets copiados no Windows/as web às vezes trazem \r, aspas ou espaços — quebram o host e geram curl exit 6.
+          trim_secret() {
+            printf '%s' "$1" | tr -d '\r' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//;s/^"//;s/"$//'
+          }
+          SUPABASE_URL="$(trim_secret "${SUPABASE_URL}")"
+          SUPABASE_ANON_KEY="$(trim_secret "${SUPABASE_ANON_KEY}")"
           if [ -z "${SUPABASE_URL:-}" ] || [ -z "${SUPABASE_ANON_KEY:-}" ]; then
             echo "::error::Configure os secrets do repositório: SUPABASE_URL e SUPABASE_ANON_KEY (mesmos valores de VITE_SUPABASE_* no .env.local)."
             exit 1
@@ -28,6 +34,12 @@ jobs:
             exit 1
           fi
           base="${SUPABASE_URL%/}"
+          host="${base#*://}"
+          host="${host%%/*}"
+          if ! getent ahosts "${host}" >/dev/null 2>&1; then
+            echo "::error::DNS não resolve '${host}'. Use exatamente a **Project URL** em Supabase: Settings → API (não confunda com outro ID). Cole de novo o valor de VITE_SUPABASE_URL no secret SUPABASE_URL."
+            exit 1
+          fi
           set +e
           code=$(curl -sS -o /tmp/supabase_keepalive.json -w "%{http_code}" \
             -H "apikey: ${SUPABASE_ANON_KEY}" \
@@ -36,7 +48,7 @@ jobs:
           curl_exit=$?
           set -e
           if [ "$curl_exit" -ne 0 ]; then
-            echo "::error::Falha ao conectar no Supabase (curl exit code: ${curl_exit}). Verifique se SUPABASE_URL está correta e acessível (com https://)."
+            echo "::error::Falha ao conectar no Supabase (curl exit code: ${curl_exit}). Host usado: ${host}"
             echo "Supabase base URL (sem barra final): ${base}"
             exit 1
           fi
