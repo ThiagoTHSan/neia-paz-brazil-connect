@@ -3,7 +3,7 @@ import logo from "@/assets/LogoNeia.png";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { useLanguage } from "@/i18n/LanguageContext";
 
-const navKeys = ["nav.about", "nav.services", "nav.portfolio", "nav.contact"];
+const navKeys = ["nav.services", "nav.portfolio", "nav.about", "nav.contact"];
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer className="bg-dark py-16 md:py-20" role="contentinfo">
       <div className="container mx-auto px-6 lg:px-12 flex flex-col items-center">
-        <img src={logo} alt="Neia Paz" className="h-10 mb-8" />
+        <img src={logo} alt="Neia Paz" className="h-14 w-auto md:h-16 mb-8" />
 
         <nav className="flex flex-wrap justify-center gap-8 mb-8" aria-label="Footer navigation">
           {navKeys.map((key) => (

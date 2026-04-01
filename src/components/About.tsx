@@ -7,7 +7,7 @@ export default function About() {
   const { t } = useLanguage();
 
   return (
-    <section id="about" className="py-24 md:py-32 lg:py-40 bg-background" aria-label="About Neia Paz">
+    <section id="about" className="scroll-mt-24 py-24 md:py-32 lg:py-40 bg-background" aria-label="About Neia Paz">
       <div ref={ref} className="reveal container mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="relative">
@@ -17,7 +17,7 @@ export default function About() {
               className="w-full max-w-md mx-auto lg:mx-0 aspect-[4/5] object-cover shadow-xl shadow-black/10"
               loading="lazy"
             />
-            <div className="absolute inset-0 max-w-md mx-auto lg:mx-0 ring-1 ring-inset ring-foreground/5" />
+            <div className="absolute inset-0 max-w-md mx-auto lg:mx-0 ring-1 ring-inset ring-foreground/8" />
           </div>
 
           <div>

@@ -34,6 +34,14 @@ Site institucional da NeiaPaz (eventos, design e conexões Brasil-Italia), desen
 ## Deploy (GitHub Pages + GitHub Actions)
 O deploy acontece automaticamente ao fazer push na branch `main` via workflow `Deploy to GitHub Pages`.
 
+### Manter o Supabase ativo (plano gratuito)
+O workflow `.github/workflows/supabase-keepalive.yml` roda **uma vez por dia** e chama `/auth/v1/health` no seu projeto. Para funcionar, crie **GitHub Actions secrets** no repositório com os mesmos valores de `.env.local`:
+
+- `SUPABASE_URL` — igual a `VITE_SUPABASE_URL`
+- `SUPABASE_ANON_KEY` — igual a `VITE_SUPABASE_ANON_KEY`
+
+Em **Settings → Secrets and variables → Actions → New repository secret**. Você pode disparar o job manualmente em **Actions → Supabase keep-alive → Run workflow**.
+
 ### Fluxo recomendado no dia a dia (Cursor)
 1. Fazer alterações no código.
 2. Validar localmente:

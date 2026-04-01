@@ -1,17 +1,31 @@
 import logo from "@/assets/LogoNeia.png";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { useLocation } from "react-router-dom";
 
 export default function Hero() {
   const { t } = useLanguage();
+  const location = useLocation();
+  const prefix = location.pathname === "/" ? "" : "/";
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center bg-dark overflow-hidden"
+      className="scroll-mt-24 relative min-h-screen flex items-center justify-center bg-dark overflow-hidden"
       aria-label="Hero"
     >
-      <div className="hero-grain absolute inset-0" />
-      <div className="hero-lines" />
+      {/* Imagem de fundo (public/hero-exhibition.png) + vinheta para legibilidade */}
+      <div className="absolute inset-0" aria-hidden>
+        <img
+          src="/hero-exhibition.png"
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+          fetchPriority="high"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/35 md:to-black/25" />
+        <div className="absolute inset-0 bg-black/20" />
+      </div>
+      <div className="hero-grain pointer-events-none absolute inset-0 z-[1] opacity-60" />
+      <div className="hero-lines pointer-events-none z-[1]" />
 
       <div className="relative z-10 container mx-auto px-6 lg:px-12 text-center">
         <img
@@ -27,13 +41,13 @@ export default function Hero() {
         </p>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-[fadeIn_1s_ease-out_1.1s_forwards]">
           <a
-            href="#services"
+            href={`${prefix}#services`}
             className="inline-block border border-primary text-primary px-8 py-3.5 text-sm font-medium tracking-wider uppercase transition-all duration-200 hover:bg-primary hover:text-primary-foreground active:scale-[0.97]"
           >
             {t("hero.cta.services")}
           </a>
           <a
-            href="#contact"
+            href={`${prefix}#contact`}
             className="inline-block bg-primary text-primary-foreground px-8 py-3.5 text-sm font-medium tracking-wider uppercase transition-all duration-200 hover:brightness-110 active:scale-[0.97]"
           >
             {t("hero.cta.contact")}

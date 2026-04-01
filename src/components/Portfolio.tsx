@@ -1,45 +1,33 @@
 import { useState } from "react";
 import { X } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useReveal } from "@/hooks/useReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
-
-import p1 from "@/assets/portfolio-1.jpg";
-import p2 from "@/assets/portfolio-2.jpg";
-import p3 from "@/assets/portfolio-3.jpg";
-import p4 from "@/assets/portfolio-4.jpg";
-import p5 from "@/assets/portfolio-5.jpg";
-import p6 from "@/assets/portfolio-6.jpg";
-
-const projects = [
-  { img: p1, nameKey: "portfolio.1.name", tagKey: "portfolio.tag.event", descKey: "portfolio.1.desc", client: "European Luxury House" },
-  { img: p2, nameKey: "portfolio.2.name", tagKey: "portfolio.tag.corporate", descKey: "portfolio.2.desc", client: "Global Technology Firm" },
-  { img: p3, nameKey: "portfolio.3.name", tagKey: "portfolio.tag.design", descKey: "portfolio.3.desc", client: "Italian Design Studio" },
-  { img: p4, nameKey: "portfolio.4.name", tagKey: "portfolio.tag.event", descKey: "portfolio.4.desc", client: "International Trade Association" },
-  { img: p5, nameKey: "portfolio.5.name", tagKey: "portfolio.tag.design", descKey: "portfolio.5.desc", client: "Scandinavian Brand" },
-  { img: p6, nameKey: "portfolio.6.name", tagKey: "portfolio.tag.corporate", descKey: "portfolio.6.desc", client: "US-based Consulting Firm" },
-];
+import { portfolioProjects } from "@/data/portfolioProjects";
 
 export default function Portfolio() {
   const ref = useReveal();
   const { t } = useLanguage();
-  const [selected, setSelected] = useState<typeof projects[0] | null>(null);
+  const [selected, setSelected] = useState<(typeof portfolioProjects)[0] | null>(null);
 
   return (
-    <section id="portfolio" className="py-24 md:py-32 lg:py-40 bg-secondary" aria-label="Selected Projects">
+    <section id="portfolio" className="scroll-mt-24 py-24 md:py-32 lg:py-40 bg-secondary" aria-label="Selected Projects">
       <div ref={ref} className="reveal container mx-auto px-6 lg:px-12">
-        <h2 className="font-serif text-3xl md:text-4xl lg:text-[2.75rem] leading-[1.15] mb-16 text-center">
-          {t("portfolio.title")}
-        </h2>
+        <div className="mb-16 text-center">
+          <h2 className="font-serif text-3xl md:text-4xl lg:text-[2.75rem] leading-[1.15]">
+            {t("portfolio.title")}
+          </h2>
+        </div>
 
         <div className="reveal-stagger columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-          {projects.map((p) => (
+          {portfolioProjects.map((p) => (
             <article
               key={p.nameKey}
               className="reveal break-inside-avoid group relative cursor-pointer overflow-hidden"
               onClick={() => setSelected(p)}
             >
               <img
-                src={p.img}
+                src={p.coverImage}
                 alt={`${t(p.nameKey)} – ${t(p.tagKey)} project by Neia Paz`}
                 className="w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 loading="lazy"
@@ -52,6 +40,15 @@ export default function Portfolio() {
               </div>
             </article>
           ))}
+        </div>
+
+        <div className="mt-14 text-center">
+          <Link
+            to="/portfolio"
+            className="inline-flex items-center justify-center border border-primary text-primary px-8 py-3.5 text-sm font-medium tracking-wider uppercase transition-all duration-200 hover:bg-primary hover:text-primary-foreground active:scale-[0.97]"
+          >
+            {t("portfolio.viewAll")}
+          </Link>
         </div>
       </div>
 
@@ -75,7 +72,7 @@ export default function Portfolio() {
             className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
             onClick={(e) => e.stopPropagation()}
           >
-            <img src={selected.img} alt={t(selected.nameKey)} className="w-full object-cover max-h-[70vh]" />
+            <img src={selected.coverImage} alt={t(selected.nameKey)} className="w-full object-cover max-h-[70vh]" />
             <div>
               <span className="inline-block text-xs font-medium uppercase tracking-wider px-3 py-1 mb-4 bg-primary/10 text-primary">
                 {t(selected.tagKey)}
@@ -83,6 +80,14 @@ export default function Portfolio() {
               <h3 className="font-serif text-dark-foreground text-2xl md:text-3xl mb-4">{t(selected.nameKey)}</h3>
               <p className="text-dark-foreground/60 leading-relaxed mb-4">{t(selected.descKey)}</p>
               <p className="text-dark-foreground/40 text-sm">{t("portfolio.client")}: {selected.client}</p>
+              <div className="mt-6">
+                <Link
+                  to={`/portfolio/${selected.slug}`}
+                  className="inline-flex items-center justify-center border border-primary text-primary px-5 py-2.5 text-xs font-medium tracking-wider uppercase transition-all duration-200 hover:bg-primary hover:text-primary-foreground active:scale-[0.97]"
+                >
+                  {t("portfolio.viewCase")}
+                </Link>
+              </div>
             </div>
           </div>
         </div>

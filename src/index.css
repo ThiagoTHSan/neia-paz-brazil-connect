@@ -4,38 +4,40 @@
 
 @layer base {
   :root {
-    --background: 40 3% 95%;
-    --foreground: 0 0% 5%;
+    /* Paleta base (RGB triplets para suportar alpha no Tailwind) */
+    --background: 245 244 242; /* #F5F4F2 — branco quente */
+    --foreground: 56 48 42; /* #38302A — quase preto */
 
-    --card: 40 3% 95%;
-    --card-foreground: 0 0% 5%;
+    --card: 224 222 221; /* #E0DEDD — prata claro */
+    --card-foreground: 56 48 42; /* #38302A */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 5%;
+    --popover: 245 244 242; /* #F5F4F2 */
+    --popover-foreground: 56 48 42; /* #38302A */
 
-    --primary: 27 79% 43%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 212 101 42; /* #D4652A — laranja do logo */
+    --primary-foreground: 245 244 242; /* #F5F4F2 */
 
-    --secondary: 40 5% 94%;
-    --secondary-foreground: 0 0% 12%;
+    --secondary: 238 236 232; /* #EEECE8 — creme neutro */
+    --secondary-foreground: 85 82 80; /* #555250 — cinza escuro */
 
-    --muted: 40 5% 94%;
-    --muted-foreground: 0 0% 40%;
+    --muted: 200 197 192; /* #C8C5C0 — prata médio */
+    --muted-foreground: 120 117 114; /* #787572 — cinza médio */
 
-    --accent: 27 79% 43%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 212 101 42; /* #D4652A */
+    --accent-foreground: 245 244 242; /* #F5F4F2 */
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 220 38 38; /* red-600 aprox */
+    --destructive-foreground: 245 244 242; /* #F5F4F2 */
 
-    --border: 40 5% 88%;
-    --input: 40 5% 88%;
-    --ring: 27 79% 43%;
+    --border: 200 197 192; /* #C8C5C0 */
+    --input: 224 222 221; /* #E0DEDD */
+    --ring: 212 101 42; /* #D4652A */
 
     --radius: 2px;
 
-    --dark-bg: 0 0% 5%;
-    --dark-fg: 40 3% 92%;
+    /* Nav / footer (tom escuro sugerido) */
+    --dark-bg: 85 82 80; /* #555250 */
+    --dark-fg: 245 244 242; /* #F5F4F2 */
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;

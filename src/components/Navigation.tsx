@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import logo from "@/assets/LogoNeia.png";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { useLocation } from "react-router-dom";
 
 const navKeys = [
-  { key: "nav.about", href: "#about" },
   { key: "nav.services", href: "#services" },
   { key: "nav.portfolio", href: "#portfolio" },
+  { key: "nav.about", href: "#about" },
   { key: "nav.contact", href: "#contact" },
 ];
 
@@ -13,6 +14,8 @@ export default function Navigation() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { t } = useLanguage();
+  const location = useLocation();
+  const prefix = location.pathname === "/" ? "" : "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -28,15 +31,15 @@ export default function Navigation() {
       role="banner"
     >
       <nav className="container mx-auto flex items-center justify-between px-6 py-4 lg:px-12" aria-label="Main navigation">
-        <a href="#hero" className="block" aria-label="Neia Paz – Home">
-          <img src={logo} alt="Neia Paz – International Project Manager" className="h-10 w-auto lg:h-12" />
+        <a href={`${prefix}#hero`} className="block" aria-label="Neia Paz – Home">
+          <img src={logo} alt="Neia Paz – International Project Manager" className="h-12 w-auto md:h-14 lg:h-16" />
         </a>
 
         <ul className="hidden md:flex items-center gap-10">
           {navKeys.map((link) => (
             <li key={link.href}>
               <a
-                href={link.href}
+                href={`${prefix}${link.href}`}
                 className="text-dark-foreground/70 text-sm font-medium tracking-wide uppercase hover:text-primary transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-dark"
               >
                 {t(link.key)}
@@ -64,7 +67,7 @@ export default function Navigation() {
             {navKeys.map((link) => (
               <li key={link.href}>
                 <a
-                  href={link.href}
+                  href={`${prefix}${link.href}`}
                   onClick={() => setOpen(false)}
                   className="text-dark-foreground text-2xl font-serif tracking-wide hover:text-primary transition-colors duration-200"
                 >

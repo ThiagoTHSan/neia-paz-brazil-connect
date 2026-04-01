@@ -15,7 +15,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 lg:py-40 bg-secondary" aria-label="Contact">
+    <section id="contact" className="scroll-mt-24 py-24 md:py-32 lg:py-40 bg-secondary" aria-label="Contact">
       <div ref={ref} className="reveal container mx-auto px-6 lg:px-12">
         <h2 className="font-serif text-3xl md:text-4xl lg:text-[2.75rem] leading-[1.15] mb-16 text-center">
           {t("contact.title")}

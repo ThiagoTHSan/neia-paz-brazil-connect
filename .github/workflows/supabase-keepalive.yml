@@ -1,0 +1,35 @@
+# WHY: Projetos Supabase no plano gratuito podem ser pausados após período sem atividade.
+# Este job gera tráfego legítimo contra a API (health) para manter o projeto "acordado".
+name: Supabase keep-alive
+
+on:
+  schedule:
+    # Diariamente 09:00 UTC — ajuste se quiser outro horário (cron é sempre UTC no GitHub).
+    - cron: "0 9 * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase (Auth health)
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${SUPABASE_URL:-}" ] || [ -z "${SUPABASE_ANON_KEY:-}" ]; then
+            echo "::error::Configure os secrets do repositório: SUPABASE_URL e SUPABASE_ANON_KEY (mesmos valores de VITE_SUPABASE_* no .env.local)."
+            exit 1
+          fi
+          base="${SUPABASE_URL%/}"
+          code=$(curl -sS -o /tmp/supabase_keepalive.json -w "%{http_code}" \
+            -H "apikey: ${SUPABASE_ANON_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
+            "${base}/auth/v1/health")
+          if [ "$code" != "200" ]; then
+            echo "::error::Supabase respondeu HTTP $code"
+            cat /tmp/supabase_keepalive.json || true
+            exit 1
+          fi
+          echo "Keep-alive OK (HTTP $code)"
