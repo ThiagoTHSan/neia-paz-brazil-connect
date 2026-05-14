@@ -59,17 +59,32 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', system-ui, sans-serif;
-    font-feature-settings: 'ss01', 'cv11';
+    font-feature-settings: 'ss01', 'cv11', 'kern';
+    font-variant-ligatures: common-ligatures;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    line-height: 1.65;
+    letter-spacing: 0.005em;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', 'Cormorant Garamond', serif;
     overflow-wrap: break-word;
-    letter-spacing: -0.01em;
+    font-feature-settings: 'kern', 'liga', 'dlig';
   }
+  h1 { line-height: 1.02; letter-spacing: -0.025em; }
+  h2 { line-height: 1.06; letter-spacing: -0.02em; }
+  h3 { line-height: 1.15; letter-spacing: -0.015em; }
+  h4, h5, h6 { line-height: 1.25; letter-spacing: -0.01em; }
 
-  html {
-    scroll-behavior: smooth;
+  p { line-height: 1.7; letter-spacing: 0.005em; }
+  blockquote { line-height: 1.4; letter-spacing: -0.01em; }
+
+  /* Editorial caps — small uppercase eyebrows */
+  .eyebrow,
+  [class*="tracking-["][class*="uppercase"] {
+    font-feature-settings: 'kern', 'tnum';
   }
 
   /* Cursor custom — ativo apenas em telas com pointer fino e sem reduced motion */
