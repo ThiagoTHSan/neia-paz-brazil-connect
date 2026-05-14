@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        serif: ['"DM Serif Display"', 'serif'],
-        sans: ['"DM Sans"', 'sans-serif'],
+        serif: ['"Playfair Display"', '"Cormorant Garamond"', 'serif'],
+        sans: ['"Inter"', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "rgb(var(--border) / <alpha-value>)",
@@ -54,6 +54,7 @@ export default {
         dark: {
           DEFAULT: "rgb(var(--dark-bg) / <alpha-value>)",
           foreground: "rgb(var(--dark-fg) / <alpha-value>)",
+          warm: "rgb(var(--dark-warm) / <alpha-value>)",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

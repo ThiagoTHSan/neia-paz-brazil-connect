@@ -9,35 +9,71 @@ export default function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="bg-dark py-16 md:py-20" role="contentinfo">
-      <div className="container mx-auto px-6 lg:px-12 flex flex-col items-center">
-        <img src={logo} alt="Neia Paz" className="h-14 w-auto md:h-16 mb-8" />
-
-        <nav className="flex flex-wrap justify-center gap-8 mb-8" aria-label="Footer navigation">
-          {navKeys.map((key) => (
-            <a
-              key={key}
-              href={`#${key.split(".")[1]}`}
-              className="text-dark-foreground/50 text-sm hover:text-primary transition-colors"
-            >
-              {t(key)}
-            </a>
-          ))}
-        </nav>
-
-        <div className="flex gap-5 mb-10">
-          <a href="https://www.linkedin.com/in/neiapaz" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-dark-foreground/40 hover:text-primary transition-colors">
-            <Linkedin className="w-5 h-5" />
-          </a>
-          <a href="https://instagram.com/neiapaz" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-dark-foreground/40 hover:text-primary transition-colors">
-            <Instagram className="w-5 h-5" />
-          </a>
-          <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-dark-foreground/40 hover:text-primary transition-colors">
-            <WhatsAppIcon className="w-5 h-5" />
-          </a>
+    <footer className="bg-foreground py-20 md:py-24 relative" role="contentinfo">
+      <div className="container mx-auto px-6 lg:px-12">
+        <div className="flex flex-col items-center text-center mb-12">
+          <img src={logo} alt="Neia Paz" className="h-16 md:h-20 w-auto mb-6 brightness-0 invert" />
+          <p className="font-serif italic text-dark-foreground/60 text-base md:text-lg max-w-md text-balance">
+            Bridging Brazil &amp; Italy through design, events and people.
+          </p>
         </div>
 
-        <p className="text-dark-foreground/30 text-xs">{t("footer.rights")}</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-6 max-w-3xl mx-auto mb-12">
+          <div>
+            <p className="text-[10px] tracking-[0.3em] uppercase text-primary mb-4">Navigate</p>
+            <ul className="space-y-2.5">
+              {navKeys.map((k) => (
+                <li key={k}>
+                  <a
+                    href={`#${k.split(".")[1]}`}
+                    className="text-dark-foreground/55 text-sm hover:text-primary transition-colors"
+                  >
+                    {t(k)}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="text-[10px] tracking-[0.3em] uppercase text-primary mb-4">Contact</p>
+            <ul className="space-y-2.5 text-dark-foreground/55 text-sm">
+              <li>
+                <a href="mailto:info@neiapaz.com" className="hover:text-primary transition-colors">
+                  info@neiapaz.com
+                </a>
+              </li>
+              <li>{t("contact.based.value")}</li>
+            </ul>
+          </div>
+          <div>
+            <p className="text-[10px] tracking-[0.3em] uppercase text-primary mb-4">Studio</p>
+            <ul className="space-y-2.5 text-dark-foreground/55 text-sm">
+              <li>Milano, IT</li>
+              <li>São Paulo, BR</li>
+            </ul>
+          </div>
+          <div>
+            <p className="text-[10px] tracking-[0.3em] uppercase text-primary mb-4">Follow</p>
+            <div className="flex gap-4 text-dark-foreground/55">
+              <a href="https://www.linkedin.com/in/neiapaz" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-primary transition-colors">
+                <Linkedin className="w-4 h-4" />
+              </a>
+              <a href="https://instagram.com/neiapaz" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-primary transition-colors">
+                <Instagram className="w-4 h-4" />
+              </a>
+              <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="hover:text-primary transition-colors">
+                <WhatsAppIcon className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/40 to-transparent mb-8" />
+
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] tracking-wider text-dark-foreground/30">
+          <p>{t("footer.rights")}</p>
+          <p className="uppercase tracking-[0.3em]">Milano · São Paulo</p>
+        </div>
       </div>
     </footer>
   );

@@ -7,14 +7,16 @@ import Portfolio from "@/components/Portfolio";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
 import FloatingWhatsAppButton from "@/components/FloatingWhatsAppButton";
+import ScrollProgress from "@/components/ScrollProgress";
+import CustomCursor from "@/components/CustomCursor";
 
 export default function Index() {
   return (
     <>
+      <ScrollProgress />
+      <CustomCursor />
       <Navigation />
-      <LanguageSwitcher />
       <main>
         <Hero />
         <ValueProps />
