@@ -54,6 +54,7 @@ export default {
         dark: {
           DEFAULT: "rgb(var(--dark-bg) / <alpha-value>)",
           foreground: "rgb(var(--dark-fg) / <alpha-value>)",
+          warm: "rgb(var(--dark-warm) / <alpha-value>)",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
