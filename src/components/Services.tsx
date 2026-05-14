@@ -1,6 +1,6 @@
-import { useReveal } from "@/hooks/useReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
 import portfolioBg from "@/assets/portfolio-2.jpg";
+import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 
 const services = [
   { num: "01", titleKey: "services.1.title", descKey: "services.1.desc", className: "md:col-span-2 md:row-span-2", featured: true },
@@ -10,7 +10,6 @@ const services = [
 ];
 
 export default function Services() {
-  const ref = useReveal();
   const { t } = useLanguage();
 
   return (
@@ -19,19 +18,20 @@ export default function Services() {
       className="scroll-mt-24 bg-foreground py-24 md:py-32 lg:py-40"
       aria-label="Services"
     >
-      <div ref={ref} className="reveal container mx-auto px-6 lg:px-12">
-        <div className="mb-16 md:mb-20 max-w-3xl">
-          <p className="text-primary text-[10px] tracking-[0.4em] uppercase mb-5">— What I Do</p>
-          <h2 className="font-serif text-dark-foreground text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-balance">
+      <div className="container mx-auto px-6 lg:px-12">
+        <Reveal className="mb-16 md:mb-20 max-w-3xl">
+          <p className="text-primary text-[10px] tracking-[0.42em] uppercase mb-5 font-medium">— What I Do</p>
+          <h2 className="font-serif text-dark-foreground text-4xl md:text-5xl lg:text-6xl text-balance">
             {t("services.title")}
           </h2>
-        </div>
+        </Reveal>
 
-        <div className="reveal-stagger grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 auto-rows-[minmax(220px,auto)]">
+        <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 auto-rows-[minmax(220px,auto)]">
           {services.map((s) => (
-            <article
+            <StaggerItem
               key={s.titleKey}
-              className={`reveal group relative overflow-hidden bg-dark-warm border border-dark-foreground/5 p-8 lg:p-10 transition-all duration-500 hover:-translate-y-1 hover:border-primary ${s.className}`}
+              as="article"
+              className={`group relative overflow-hidden bg-dark-warm border border-dark-foreground/5 p-8 lg:p-10 transition-all duration-500 hover:-translate-y-1 hover:border-primary ${s.className}`}
             >
               {s.featured && (
                 <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-700">
@@ -40,17 +40,17 @@ export default function Services() {
                 </div>
               )}
               <div className="relative z-10 h-full flex flex-col">
-                <span className="font-serif text-primary text-xl tracking-wider mb-6">{s.num}</span>
-                <h3 className="font-serif text-dark-foreground text-2xl md:text-[1.75rem] leading-tight mb-4 text-balance">
+                <span className="font-serif text-primary text-xl tracking-[0.15em] mb-6">{s.num}</span>
+                <h3 className="font-serif text-dark-foreground text-2xl md:text-[1.75rem] mb-5 text-balance">
                   {t(s.titleKey)}
                 </h3>
-                <p className="text-dark-foreground/55 text-sm leading-relaxed mt-auto max-w-md">
+                <p className="text-dark-foreground/55 text-[14px] leading-[1.75] tracking-[0.005em] mt-auto max-w-md">
                   {t(s.descKey)}
                 </p>
               </div>
-            </article>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerGroup>
       </div>
     </section>
   );
