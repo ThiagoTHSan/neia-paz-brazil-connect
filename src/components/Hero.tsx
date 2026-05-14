@@ -1,4 +1,4 @@
-import logo from "@/assets/LogoNeia.png";
+import { useEffect, useRef } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { useLocation } from "react-router-dom";
 
@@ -6,6 +6,37 @@ export default function Hero() {
   const { t } = useLanguage();
   const location = useLocation();
   const prefix = location.pathname === "/" ? "" : "/";
+  const bgRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) return;
+    const onScroll = () => {
+      if (!bgRef.current) return;
+      const y = window.scrollY;
+      bgRef.current.style.transform = `translate3d(0, ${y * 0.25}px, 0) scale(1.05)`;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Highlight em itálico dourado para a palavra-chave da headline
+  const headline = t("hero.headline");
+  const highlights = ["Brazil–Italy", "Brasil–Itália", "Brasile–Italia", "connections", "conexões", "Connessioni", "Conexiones"];
+  let rendered: React.ReactNode = headline;
+  for (const word of highlights) {
+    if (headline.includes(word)) {
+      const [a, b] = headline.split(word);
+      rendered = (
+        <>
+          {a}
+          <span className="italic text-primary font-normal">{word}</span>
+          {b}
+        </>
+      );
+      break;
+    }
+  }
 
   return (
     <section
@@ -13,52 +44,63 @@ export default function Hero() {
       className="scroll-mt-24 relative min-h-screen flex items-center justify-center bg-dark overflow-hidden"
       aria-label="Hero"
     >
-      {/* Imagem de fundo (public/hero-exhibition.png) + vinheta para legibilidade */}
-      <div className="absolute inset-0" aria-hidden>
+      <div ref={bgRef} className="absolute inset-0 will-change-transform" aria-hidden>
         <img
           src="/hero-exhibition.png"
           alt=""
           className="absolute inset-0 h-full w-full object-cover"
           fetchPriority="high"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/35 md:to-black/25" />
-        <div className="absolute inset-0 bg-black/20" />
+        {/* Overlay quente, não flat */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/55 to-[#1a1a14]/40" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.55)_100%)]" />
       </div>
-      <div className="hero-grain pointer-events-none absolute inset-0 z-[1] opacity-60" />
+
+      <div className="hero-grain pointer-events-none absolute inset-0 z-[1] opacity-70" />
       <div className="hero-lines pointer-events-none z-[1]" />
 
-      <div className="relative z-10 container mx-auto px-6 lg:px-12 text-center">
-        <img
-          src={logo}
-          alt="Neia Paz signature logo"
-          className="mx-auto mb-10 w-64 md:w-80 lg:w-96 opacity-0 animate-[fadeIn_1s_ease-out_0.2s_forwards]"
-        />
-        <h1 className="font-serif text-dark-foreground text-3xl md:text-5xl lg:text-6xl leading-tight md:leading-[1.1] max-w-3xl mx-auto opacity-0 animate-[fadeIn_1s_ease-out_0.5s_forwards]" style={{ textWrap: "balance" as any }}>
-          {t("hero.headline")}
+      <div className="relative z-10 container mx-auto px-6 lg:px-12 text-center max-w-5xl">
+        <p className="text-primary text-[10px] md:text-[11px] tracking-[0.4em] uppercase mb-8 opacity-0 animate-[fadeIn_1s_ease-out_0.1s_forwards]">
+          NeiaPaz · Milano — São Paulo
+        </p>
+
+        <h1
+          className="font-serif text-dark-foreground text-[2.5rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] font-medium leading-[1.02] text-balance opacity-0 animate-[fadeIn_1.1s_ease-out_0.4s_forwards]"
+        >
+          {rendered}
         </h1>
-        <p className="mt-6 text-dark-foreground/60 text-base md:text-lg max-w-xl mx-auto opacity-0 animate-[fadeIn_1s_ease-out_0.8s_forwards]" style={{ textWrap: "pretty" as any }}>
+
+        <div className="mx-auto mt-10 mb-8 h-px w-24 bg-primary opacity-0 animate-[fadeIn_1s_ease-out_0.7s_forwards]" />
+
+        <p className="text-dark-foreground/65 text-base md:text-lg max-w-2xl mx-auto leading-relaxed tracking-wide opacity-0 animate-[fadeIn_1s_ease-out_0.85s_forwards]">
           {t("hero.subheadline")}
         </p>
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-[fadeIn_1s_ease-out_1.1s_forwards]">
-          <a
-            href={`${prefix}#services`}
-            className="inline-block border border-primary text-primary px-8 py-3.5 text-sm font-medium tracking-wider uppercase transition-all duration-200 hover:bg-primary hover:text-primary-foreground active:scale-[0.97]"
-          >
-            {t("hero.cta.services")}
-          </a>
+
+        <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-[fadeIn_1s_ease-out_1.05s_forwards]">
           <a
             href={`${prefix}#contact`}
-            className="inline-block bg-primary text-primary-foreground px-8 py-3.5 text-sm font-medium tracking-wider uppercase transition-all duration-200 hover:brightness-110 active:scale-[0.97]"
+            className="inline-flex items-center justify-center bg-primary text-primary-foreground px-9 py-4 text-[11px] font-semibold tracking-[0.25em] uppercase transition-all duration-300 hover:brightness-110 hover:translate-y-[-2px] active:scale-[0.98]"
           >
             {t("hero.cta.contact")}
+          </a>
+          <a
+            href={`${prefix}#services`}
+            className="inline-flex items-center justify-center border border-dark-foreground/40 text-dark-foreground px-9 py-4 text-[11px] font-semibold tracking-[0.25em] uppercase transition-all duration-300 hover:border-primary hover:text-primary"
+          >
+            {t("hero.cta.services")}
           </a>
         </div>
       </div>
 
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3 opacity-0 animate-[fadeIn_1s_ease-out_1.4s_forwards]">
+        <span className="text-dark-foreground/40 text-[10px] tracking-[0.3em] uppercase">Scroll</span>
+        <div className="scroll-indicator" />
+      </div>
+
       <style>{`
         @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(16px); filter: blur(4px); }
-          to { opacity: 1; transform: translateY(0); filter: blur(0); }
+          from { opacity: 0; transform: translateY(20px); filter: blur(6px); }
+          to   { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
       `}</style>
     </section>
