@@ -1,11 +1,10 @@
 import { useState, FormEvent } from "react";
 import { Linkedin, Instagram } from "lucide-react";
 import { WhatsAppIcon } from "@/components/WhatsAppIcon";
-import { useReveal } from "@/hooks/useReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 
 export default function Contact() {
-  const ref = useReveal();
   const { t } = useLanguage();
   const [submitted, setSubmitted] = useState(false);
 
@@ -20,7 +19,6 @@ export default function Contact() {
       className="scroll-mt-24 py-24 md:py-32 lg:py-40 bg-background relative overflow-hidden paper-grain"
       aria-label="Contact"
     >
-      {/* Ilustração minimalista decorativa de fundo */}
       <svg
         className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none"
         viewBox="0 0 800 600"
@@ -38,32 +36,31 @@ export default function Contact() {
         </text>
       </svg>
 
-      <div ref={ref} className="reveal container mx-auto px-6 lg:px-12 relative z-10">
+      <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 max-w-6xl mx-auto">
-          {/* Coluna esquerda */}
-          <div className="lg:col-span-5">
-            <p className="text-primary text-[10px] tracking-[0.4em] uppercase mb-5">— Get in Touch</p>
-            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.05] mb-8 text-balance">
+          <Reveal className="lg:col-span-5">
+            <p className="text-primary text-[10px] tracking-[0.42em] uppercase mb-5 font-medium">— Get in Touch</p>
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-8 text-balance">
               {t("contact.title")}
             </h2>
-            <p className="text-foreground/70 leading-relaxed mb-12 text-[15px] max-w-md">
+            <p className="text-foreground/70 leading-[1.8] tracking-[0.005em] mb-12 text-[15px] max-w-md">
               {t("contact.intro")}
             </p>
 
             <div className="space-y-5 mb-12">
               <div>
-                <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-1.5">
+                <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground mb-1.5 font-medium">
                   {t("contact.email")}
                 </p>
-                <a href="mailto:info@neiapaz.com" className="link-underline text-foreground text-base">
+                <a href="mailto:info@neiapaz.com" className="link-underline text-foreground text-base tracking-[0.005em]">
                   info@neiapaz.com
                 </a>
               </div>
               <div>
-                <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground mb-1.5">
+                <p className="text-[10px] uppercase tracking-[0.32em] text-muted-foreground mb-1.5 font-medium">
                   {t("contact.based")}
                 </p>
-                <p className="text-foreground/85 text-base">{t("contact.based.value")}</p>
+                <p className="text-foreground/85 text-base tracking-[0.005em]">{t("contact.based.value")}</p>
               </div>
             </div>
 
@@ -85,62 +82,64 @@ export default function Contact() {
                 </a>
               ))}
             </div>
-          </div>
+          </Reveal>
 
-          {/* Coluna direita - formulário */}
-          <div className="lg:col-span-7">
-            <p className="text-xs italic text-muted-foreground mb-8 tracking-wide">
+          <Reveal className="lg:col-span-7" delay={0.1}>
+            <p className="text-xs italic text-muted-foreground mb-8 tracking-[0.05em]">
               {t("contact.accepting")}
             </p>
 
             {submitted ? (
               <div className="py-20 text-center border-t border-b border-border">
                 <p className="font-serif text-3xl mb-3">{t("contact.thankyou")}</p>
-                <p className="text-muted-foreground">{t("contact.thankyou.desc")}</p>
+                <p className="text-muted-foreground tracking-[0.005em]">{t("contact.thankyou.desc")}</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-8">
-                {[
-                  { id: "name", k: "contact.form.name", req: true, type: "input" as const },
-                  { id: "company", k: "contact.form.company", req: false, type: "input" as const },
-                  { id: "country", k: "contact.form.country", req: false, type: "input" as const },
-                  { id: "message", k: "contact.form.message", req: true, type: "textarea" as const },
-                ].map((f) => (
-                  <div key={f.id} className="group">
-                    <label
-                      htmlFor={f.id}
-                      className="block text-[10px] font-semibold uppercase tracking-[0.3em] text-muted-foreground mb-3"
+              <StaggerGroup as="div" className="space-y-8">
+                <form onSubmit={handleSubmit} className="space-y-8 contents">
+                  {[
+                    { id: "name", k: "contact.form.name", req: true, type: "input" as const },
+                    { id: "company", k: "contact.form.company", req: false, type: "input" as const },
+                    { id: "country", k: "contact.form.country", req: false, type: "input" as const },
+                    { id: "message", k: "contact.form.message", req: true, type: "textarea" as const },
+                  ].map((f) => (
+                    <StaggerItem key={f.id}>
+                      <label
+                        htmlFor={f.id}
+                        className="block text-[10px] font-semibold uppercase tracking-[0.32em] text-muted-foreground mb-3"
+                      >
+                        {t(f.k)}
+                      </label>
+                      {f.type === "input" ? (
+                        <input
+                          id={f.id}
+                          name={f.id}
+                          required={f.req}
+                          className="w-full bg-transparent border-0 border-b border-foreground/15 px-0 py-2.5 text-base tracking-[0.005em] focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground/40"
+                        />
+                      ) : (
+                        <textarea
+                          id={f.id}
+                          name={f.id}
+                          rows={3}
+                          required={f.req}
+                          className="w-full bg-transparent border-0 border-b border-foreground/15 px-0 py-2.5 text-base tracking-[0.005em] leading-[1.7] focus:outline-none focus:border-primary transition-colors resize-none"
+                        />
+                      )}
+                    </StaggerItem>
+                  ))}
+                  <StaggerItem>
+                    <button
+                      type="submit"
+                      className="w-full bg-primary text-primary-foreground px-8 py-4 text-[11px] font-semibold tracking-[0.32em] uppercase transition-all duration-300 hover:brightness-110 active:scale-[0.99] mt-4"
                     >
-                      {t(f.k)}
-                    </label>
-                    {f.type === "input" ? (
-                      <input
-                        id={f.id}
-                        name={f.id}
-                        required={f.req}
-                        className="w-full bg-transparent border-0 border-b border-foreground/15 px-0 py-2.5 text-base focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground/40"
-                      />
-                    ) : (
-                      <textarea
-                        id={f.id}
-                        name={f.id}
-                        rows={3}
-                        required={f.req}
-                        className="w-full bg-transparent border-0 border-b border-foreground/15 px-0 py-2.5 text-base focus:outline-none focus:border-primary transition-colors resize-none"
-                      />
-                    )}
-                  </div>
-                ))}
-
-                <button
-                  type="submit"
-                  className="w-full bg-primary text-primary-foreground px-8 py-4 text-[11px] font-semibold tracking-[0.3em] uppercase transition-all duration-300 hover:brightness-110 active:scale-[0.99] mt-4"
-                >
-                  {t("contact.form.send")} →
-                </button>
-              </form>
+                      {t("contact.form.send")} →
+                    </button>
+                  </StaggerItem>
+                </form>
+              </StaggerGroup>
             )}
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
-import { useReveal } from "@/hooks/useReveal";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { motion, AnimatePresence } from "framer-motion";
+import { Reveal } from "@/components/motion/Reveal";
 
 const testimonials = [
   { quoteKey: "testimonial.1.quote", name: "Charlotte Möller", company: "Design Studio Zürich, Switzerland", initials: "CM" },
@@ -9,7 +10,6 @@ const testimonials = [
 ];
 
 export default function Testimonials() {
-  const ref = useReveal();
   const { t } = useLanguage();
   const [current, setCurrent] = useState(0);
 
@@ -20,9 +20,10 @@ export default function Testimonials() {
     return () => clearInterval(i);
   }, [next]);
 
+  const item = testimonials[current];
+
   return (
     <section className="bg-foreground py-24 md:py-32 lg:py-44 relative overflow-hidden" aria-label="Testimonials">
-      {/* Aspas decorativas gigantes */}
       <span
         className="absolute font-serif text-primary/10 text-[20rem] md:text-[30rem] leading-none top-[-4rem] left-[-2rem] select-none pointer-events-none"
         aria-hidden
@@ -36,31 +37,33 @@ export default function Testimonials() {
         &rdquo;
       </span>
 
-      <div ref={ref} className="reveal container mx-auto px-6 lg:px-12 max-w-4xl text-center relative z-10">
-        <p className="text-primary text-[10px] tracking-[0.4em] uppercase mb-10">— Testimonials</p>
+      <Reveal className="container mx-auto px-6 lg:px-12 max-w-4xl text-center relative z-10">
+        <p className="text-primary text-[10px] tracking-[0.42em] uppercase mb-10 font-medium">— Testimonials</p>
 
-        <div className="relative min-h-[260px] md:min-h-[220px] flex items-center justify-center">
-          {testimonials.map((item, i) => (
-            <div
-              key={i}
-              className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-700 ${
-                i === current ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6 pointer-events-none"
-              }`}
+        <div className="relative min-h-[280px] md:min-h-[240px] flex items-center justify-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -16, filter: "blur(6px)" }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute inset-0 flex flex-col items-center justify-center"
             >
-              <blockquote className="font-serif italic text-dark-foreground text-2xl md:text-3xl lg:text-4xl leading-[1.35] mb-10 text-balance">
+              <blockquote className="font-serif italic text-dark-foreground text-2xl md:text-3xl lg:text-4xl leading-[1.4] tracking-[-0.015em] mb-10 text-balance">
                 {t(item.quoteKey)}
               </blockquote>
               <div className="flex items-center justify-center gap-4">
-                <div className="w-11 h-11 rounded-full bg-primary/15 border border-primary/40 flex items-center justify-center text-primary text-xs font-medium tracking-wider">
+                <div className="w-11 h-11 rounded-full bg-primary/15 border border-primary/40 flex items-center justify-center text-primary text-xs font-medium tracking-[0.15em]">
                   {item.initials}
                 </div>
                 <cite className="not-italic text-left">
-                  <span className="block text-primary text-sm font-medium tracking-wide">{item.name}</span>
-                  <span className="block text-dark-foreground/40 text-xs mt-0.5">{item.company}</span>
+                  <span className="block text-primary text-sm font-medium tracking-[0.05em]">{item.name}</span>
+                  <span className="block text-dark-foreground/40 text-xs mt-0.5 tracking-wide">{item.company}</span>
                 </cite>
               </div>
-            </div>
-          ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         <div className="mt-14 flex items-center justify-center gap-3">
@@ -75,7 +78,7 @@ export default function Testimonials() {
             />
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
