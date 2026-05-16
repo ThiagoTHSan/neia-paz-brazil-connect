@@ -12,7 +12,7 @@ export default function Footer() {
     <footer className="bg-foreground py-20 md:py-24 relative" role="contentinfo">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="flex flex-col items-center text-center mb-12">
-          <img src={logo} alt="Neia Paz" className="h-16 md:h-20 w-auto mb-6 brightness-0 invert" />
+          <img src={logo} alt="Neia Paz" className="h-[100px] w-[220px] object-contain mb-6 brightness-0 invert" />
           <p className="font-serif italic text-dark-foreground/60 text-base md:text-lg max-w-md text-balance">
             Bridging Brazil &amp; Italy through design, events and people.
           </p>

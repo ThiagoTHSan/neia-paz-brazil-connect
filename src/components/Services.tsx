@@ -15,7 +15,8 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="scroll-mt-24 bg-foreground py-24 md:py-32 lg:py-40"
+      className="scroll-mt-24 py-24 md:py-32 lg:py-40"
+      style={{ backgroundColor: "#3c3c3c" }}
       aria-label="Services"
     >
       <div className="container mx-auto px-6 lg:px-12">
@@ -34,9 +35,9 @@ export default function Services() {
               className={`group relative overflow-hidden bg-dark-warm border border-dark-foreground/5 p-8 lg:p-10 transition-all duration-500 hover:-translate-y-1 hover:border-primary ${s.className}`}
             >
               {s.featured && (
-                <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-700">
+                <div className="absolute inset-0 opacity-40 group-hover:opacity-50 transition-opacity duration-700">
                   <img src={portfolioBg} alt="" className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-br from-dark-warm via-dark-warm/85 to-dark-warm/40" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-dark-warm/70 via-dark-warm/45 to-dark-warm/15" />
                 </div>
               )}
               <div className="relative z-10 h-full flex flex-col">

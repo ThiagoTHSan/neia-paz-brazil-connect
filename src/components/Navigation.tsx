@@ -44,7 +44,7 @@ export default function Navigation() {
           <img
             src={logo}
             alt="Neia Paz"
-            className={`h-10 md:h-12 w-auto transition-[filter] duration-500 ${
+            className={`h-[85px] w-[190px] object-contain transition-[filter] duration-500 ${
               scrolled ? "" : "brightness-0 invert"
             }`}
           />

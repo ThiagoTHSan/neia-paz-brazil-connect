@@ -107,7 +107,7 @@ const translations: Record<Language, Record<string, string>> = {
     "contact.form.send": "Send Message",
 
     // Footer
-    "footer.rights": "© 2025 Neia Paz. All rights reserved.",
+    "footer.rights": "© 2026 Neia Paz. All rights reserved.",
   },
 
   pt: {
@@ -199,7 +199,7 @@ const translations: Record<Language, Record<string, string>> = {
     "contact.form.message": "Mensagem",
     "contact.form.send": "Enviar Mensagem",
 
-    "footer.rights": "© 2025 Neia Paz. Todos os direitos reservados.",
+    "footer.rights": "© 2026 Neia Paz. Todos os direitos reservados.",
   },
 
   it: {
@@ -291,7 +291,7 @@ const translations: Record<Language, Record<string, string>> = {
     "contact.form.message": "Messaggio",
     "contact.form.send": "Invia Messaggio",
 
-    "footer.rights": "© 2025 Neia Paz. Tutti i diritti riservati.",
+    "footer.rights": "© 2026 Neia Paz. Tutti i diritti riservati.",
   },
 
   es: {
@@ -383,7 +383,7 @@ const translations: Record<Language, Record<string, string>> = {
     "contact.form.message": "Mensaje",
     "contact.form.send": "Enviar Mensaje",
 
-    "footer.rights": "© 2025 Neia Paz. Todos los derechos reservados.",
+    "footer.rights": "© 2026 Neia Paz. Todos los derechos reservados.",
   },
 };
 

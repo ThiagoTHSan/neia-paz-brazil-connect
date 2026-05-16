@@ -23,7 +23,11 @@ export default function Testimonials() {
   const item = testimonials[current];
 
   return (
-    <section className="bg-foreground py-24 md:py-32 lg:py-44 relative overflow-hidden" aria-label="Testimonials">
+    <section
+      className="py-24 md:py-32 lg:py-44 relative overflow-hidden"
+      style={{ backgroundColor: "#515151" }}
+      aria-label="Testimonials"
+    >
       <span
         className="absolute font-serif text-primary/10 text-[20rem] md:text-[30rem] leading-none top-[-4rem] left-[-2rem] select-none pointer-events-none"
         aria-hidden
