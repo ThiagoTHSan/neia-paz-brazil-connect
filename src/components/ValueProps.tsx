@@ -11,13 +11,13 @@ export default function ValueProps() {
   const { t } = useLanguage();
 
   return (
-    <section className="bg-background py-24 md:py-32 lg:py-40 paper-grain" aria-label="Value Proposition">
+    <section className="bg-white py-24 md:py-32 lg:py-40 paper-grain" aria-label="Value Proposition">
       <div className="container mx-auto px-6 lg:px-12 relative">
         <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-px md:bg-border md:border md:border-border">
           {items.map((p) => (
             <StaggerItem
               key={p.titleKey}
-              className="bg-background p-8 md:p-10 lg:p-14 transition-colors duration-500 hover:bg-secondary"
+              className="bg-white p-8 md:p-10 lg:p-14 transition-colors duration-500 hover:bg-secondary"
             >
               <span className="block font-serif text-primary text-5xl md:text-6xl font-light leading-none mb-8 tracking-tight">
                 {p.num}
