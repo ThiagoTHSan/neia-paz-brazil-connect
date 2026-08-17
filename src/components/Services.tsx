@@ -15,14 +15,13 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="scroll-mt-24 py-24 md:py-32 lg:py-40"
-      style={{ backgroundColor: "#3c3c3c" }}
+      className="scroll-mt-24 bg-white py-24 md:py-32 lg:py-40 paper-grain"
       aria-label="Services"
     >
       <div className="container mx-auto px-6 lg:px-12">
         <Reveal className="mb-16 md:mb-20 max-w-3xl">
           <p className="text-primary text-[10px] tracking-[0.42em] uppercase mb-5 font-medium">— What I Do</p>
-          <h2 className="font-serif text-dark-foreground text-4xl md:text-5xl lg:text-6xl text-balance">
+          <h2 className="font-serif text-foreground text-4xl md:text-5xl lg:text-6xl text-balance">
             {t("services.title")}
           </h2>
         </Reveal>
@@ -32,20 +31,20 @@ export default function Services() {
             <StaggerItem
               key={s.titleKey}
               as="article"
-              className={`group relative overflow-hidden bg-dark-warm border border-dark-foreground/5 p-8 lg:p-10 transition-all duration-500 hover:-translate-y-1 hover:border-primary ${s.className}`}
+              className={`group relative overflow-hidden bg-secondary border border-border p-8 lg:p-10 transition-all duration-500 hover:-translate-y-1 hover:border-primary ${s.className}`}
             >
               {s.featured && (
-                <div className="absolute inset-0 opacity-40 group-hover:opacity-50 transition-opacity duration-700">
+                <div className="absolute inset-0 opacity-15 group-hover:opacity-20 transition-opacity duration-700">
                   <img src={portfolioBg} alt="" className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-br from-dark-warm/70 via-dark-warm/45 to-dark-warm/15" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/90 via-white/75 to-white/45" />
                 </div>
               )}
               <div className="relative z-10 h-full flex flex-col">
                 <span className="font-serif text-primary text-xl tracking-[0.15em] mb-6">{s.num}</span>
-                <h3 className="font-serif text-dark-foreground text-2xl md:text-[1.75rem] mb-5 text-balance">
+                <h3 className="font-serif text-foreground text-2xl md:text-[1.75rem] mb-5 text-balance">
                   {t(s.titleKey)}
                 </h3>
-                <p className="text-dark-foreground/55 text-[14px] leading-[1.75] tracking-[0.005em] mt-auto max-w-md">
+                <p className="text-muted-foreground text-[14px] leading-[1.75] tracking-[0.005em] mt-auto max-w-md">
                   {t(s.descKey)}
                 </p>
               </div>

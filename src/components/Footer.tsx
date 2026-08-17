@@ -9,11 +9,11 @@ export default function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="bg-foreground py-20 md:py-24 relative" role="contentinfo">
+    <footer className="bg-white border-t border-border py-20 md:py-24 relative" role="contentinfo">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="flex flex-col items-center text-center mb-12">
-          <img src={logo} alt="Neia Paz" className="h-[100px] w-[220px] object-contain mb-6 brightness-0 invert" />
-          <p className="font-serif italic text-dark-foreground/60 text-base md:text-lg max-w-md text-balance">
+          <img src={logo} alt="Neia Paz" className="h-[100px] w-[220px] object-contain mb-6" />
+          <p className="font-serif italic text-muted-foreground text-base md:text-lg max-w-md text-balance">
             Bridging Brazil &amp; Italy through design, events and people.
           </p>
         </div>
@@ -26,7 +26,7 @@ export default function Footer() {
                 <li key={k}>
                   <a
                     href={`#${k.split(".")[1]}`}
-                    className="text-dark-foreground/55 text-sm hover:text-primary transition-colors"
+                    className="text-muted-foreground text-sm hover:text-primary transition-colors"
                   >
                     {t(k)}
                   </a>
@@ -36,7 +36,7 @@ export default function Footer() {
           </div>
           <div>
             <p className="text-[10px] tracking-[0.3em] uppercase text-primary mb-4">Contact</p>
-            <ul className="space-y-2.5 text-dark-foreground/55 text-sm">
+            <ul className="space-y-2.5 text-muted-foreground text-sm">
               <li>
                 <a href="mailto:info@neiapaz.com" className="hover:text-primary transition-colors">
                   info@neiapaz.com
@@ -47,14 +47,14 @@ export default function Footer() {
           </div>
           <div>
             <p className="text-[10px] tracking-[0.3em] uppercase text-primary mb-4">Studio</p>
-            <ul className="space-y-2.5 text-dark-foreground/55 text-sm">
+            <ul className="space-y-2.5 text-muted-foreground text-sm">
               <li>Milano, IT</li>
               <li>São Paulo, BR</li>
             </ul>
           </div>
           <div>
             <p className="text-[10px] tracking-[0.3em] uppercase text-primary mb-4">Follow</p>
-            <div className="flex gap-4 text-dark-foreground/55">
+            <div className="flex gap-4 text-muted-foreground">
               <a href="https://www.linkedin.com/in/neiapaz" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-primary transition-colors">
                 <Linkedin className="w-4 h-4" />
               </a>
@@ -70,7 +70,7 @@ export default function Footer() {
 
         <div className="h-px w-full bg-gradient-to-r from-transparent via-primary/40 to-transparent mb-8" />
 
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] tracking-wider text-dark-foreground/30">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] tracking-wider text-muted-foreground">
           <p>{t("footer.rights")}</p>
           <p className="uppercase tracking-[0.3em]">Milano · São Paulo</p>
         </div>
