@@ -1,4 +1,4 @@
-import { useLanguage } from "@/i18n/LanguageContext";
+﻿import { useLanguage } from "@/i18n/LanguageContext";
 import portfolioBg from "@/assets/portfolio-2.jpg";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/motion/Reveal";
 
@@ -20,7 +20,7 @@ export default function Services() {
     >
       <div className="container mx-auto px-6 lg:px-12">
         <Reveal className="mb-16 md:mb-20 max-w-3xl">
-          <p className="text-primary text-[10px] tracking-[0.42em] uppercase mb-5 font-medium">— What I Do</p>
+          <p className="text-primary text-[10px] tracking-[0.42em] uppercase mb-5 font-medium">â€” What I Do</p>
           <h2 className="font-serif text-foreground text-4xl md:text-5xl lg:text-6xl text-balance">
             {t("services.title")}
           </h2>
@@ -34,9 +34,9 @@ export default function Services() {
               className={`group relative overflow-hidden bg-secondary border border-border p-8 lg:p-10 transition-all duration-500 hover:-translate-y-1 hover:border-primary ${s.className}`}
             >
               {s.featured && (
-                <div className="absolute inset-0 opacity-15 group-hover:opacity-20 transition-opacity duration-700">
+                <div className="absolute inset-0 opacity-70 group-hover:opacity-80 transition-opacity duration-700">
                   <img src={portfolioBg} alt="" className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/90 via-white/75 to-white/45" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/60 via-white/40 to-white/20" />
                 </div>
               )}
               <div className="relative z-10 h-full flex flex-col">
